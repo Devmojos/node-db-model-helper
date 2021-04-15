@@ -44,3 +44,27 @@ displayInfo(mysqlHelper);
 
 
 ```
+
+
+## Development
+
+### install
+```bash
+npm install
+```
+
+### build
+```bash
+npm run build
+```
+
+### test
+```bash
+npm test
+```
+
+### run locally
+```bash
+#You need to create your own index.development.ts first
+npm run local
+```

@@ -1,6 +1,6 @@
 {
   "name": "@devmojos/db-model-helper",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "get information from a database, show tables, columns, etc. Supports[ Mysql ]",
   "main": "index.js",
   "files": [
@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "local": "ts-node ./src/index.developmen.ts",
+    "local": "ts-node ./src/index.development.ts",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
