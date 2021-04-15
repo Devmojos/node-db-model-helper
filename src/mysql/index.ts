@@ -1,4 +1,3 @@
-const mysql = require('mysql2');
 import { IMysqlConnector } from './types';
 import { IDBHelper, IDBHelperSettings } from '../common/types';
 import MysqlConnection from './mysql-connection';

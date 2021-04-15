@@ -1,18 +1,19 @@
-const mysql = require('mysql2');
-import { IMysqlConnectionConf, IMysqlConnector, IQueryResult } from './types';
+import * as mysql from 'mysql2';
+import { PoolOptions, Pool, RowDataPacket, FieldPacket } from 'mysql2';
+import { IMysqlConnector, IQueryResult } from './types';
 import ModelQueries from './model-queries';
 
-const MysqlConnection = (conf : IMysqlConnectionConf) : IMysqlConnector => {
+const MysqlConnection = (conf : PoolOptions) : IMysqlConnector => {
 
-    let pool : any = undefined;
+    let pool : Pool;
 
     const createPool = () => {
-        if (typeof pool != "undefined") {
+        if (typeof pool !== "undefined") {
             pool.end();
         }
 
         pool  = mysql.createPool({
-            connectionLimit : 10,
+            connectionLimit: 10,
             ...conf
         });
 
@@ -21,7 +22,7 @@ const MysqlConnection = (conf : IMysqlConnectionConf) : IMysqlConnector => {
 
     const query = (sql: string) : Promise<IQueryResult> => {
         return new Promise((resolve, onError) => {
-            pool.query(sql, (error : Error, results : Array<any>, fields : Array<any>) => {
+            pool.query(sql, (error : Error, results : RowDataPacket[], fields : FieldPacket[]) => {
                 if (error) {
                     onError(error);
                 } else {
