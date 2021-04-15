@@ -2,6 +2,7 @@ const { GenericContainer } = require("testcontainers");
 
 import DbHelpers from '../index';
 import { IDBHelper, IDBAttribute } from '../common/types';
+import 'jest-extended';
 
 jest.setTimeout(30000);
 
@@ -37,6 +38,7 @@ beforeAll(async () => {
 });    
 
 afterAll(async () => {
+    await mysqlHelper.close();
     //await knexTestSetup.migrate.rollback(true);
     await envContainer.stop();
 });
@@ -45,12 +47,12 @@ describe("IndexIntegrationTest", () => {
 
     it("test-tables", async () => {
         const tables : string[] = await mysqlHelper.model.getTables();
-        expect(tables.sort()).toEqual(["knex_migrations", "knex_migrations_lock", "tasks", "users"].sort());
+        expect(tables.sort()).toIncludeSameMembers(["knex_migrations", "knex_migrations_lock", "tasks", "users"].sort());
     });
 
     it("test-table-columns", async () => {
         const columns : IDBAttribute[] = await mysqlHelper.model.getColumns("tasks");
-        expect(columns).toEqual([
+        expect(columns).toIncludeSameMembers([
                 {
                     "characterMaximumLength": null,
                     "columnType": "int unsigned",

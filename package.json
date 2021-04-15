@@ -6,6 +6,10 @@
   "files": [
     "dist/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Devmojos/node-db-model-helper.git"
+  },
   "scripts": {
     "test": "jest --config jestconfig.json",
     "local": "ts-node ./src/index.development.ts",
@@ -33,6 +37,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "jest": "^26.6.3",
+    "jest-extended": "^0.11.5",
     "knex": "^0.95.4",
     "prettier": "^2.2.1",
     "testcontainers": "^7.7.0",

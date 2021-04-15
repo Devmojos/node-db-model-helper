@@ -1,4 +1,5 @@
-import { IQueryExecutor, RowDataPacket } from './types';
+import { RowDataPacket } from 'mysql2';
+import { IQueryExecutor } from './types';
 import { IModelQueries, IDBAttribute } from '../common/types';
 import { toIDBAttribute } from './maps';
 
