@@ -7,20 +7,22 @@ const MysqlConnection = (conf : PoolOptions) : IMysqlConnector => {
 
     let pool : Pool;
 
-    const createPool = () => {
-        if (typeof pool !== "undefined") {
-            pool.end();
-        }
-
-        pool  = mysql.createPool({
-            connectionLimit: 10,
-            ...conf
-        });
-
-        return pool;
+    const poolExists = () : boolean => {
+        return typeof pool !== "undefined";
     };
 
-    const query = (sql: string) : Promise<IQueryResult> => {
+    const obj : IMysqlConnector = <IMysqlConnector>{};
+
+    obj.createPool = () : void => {
+        if (!poolExists()) {
+            pool  = mysql.createPool({
+                connectionLimit: 10,
+                ...conf
+            });
+        }
+    };
+
+    obj.query = (sql: string) : Promise<IQueryResult> => {
         return new Promise((resolve, onError) => {
             pool.query(sql, (error : Error, results : RowDataPacket[], fields : FieldPacket[]) => {
                 if (error) {
@@ -36,16 +38,13 @@ const MysqlConnection = (conf : PoolOptions) : IMysqlConnector => {
         });
     }
 
-    const close = () : void => {
+    obj.close = () : void => {
         pool?.end();
     };
 
-    return {
-        pool: createPool(),
-        query,
-        model: ModelQueries(query),
-        close
-    }
+    obj.model = ModelQueries(obj.query);
+
+    return obj;
 };
 
 export default MysqlConnection;

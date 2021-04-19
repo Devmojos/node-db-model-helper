@@ -35,6 +35,8 @@ beforeAll(async () => {
         database: knexTestConfig.connection.database,
         port: knexTestConfig.connection.port
     });
+
+    mysqlHelper.createPool();
 });    
 
 afterAll(async () => {

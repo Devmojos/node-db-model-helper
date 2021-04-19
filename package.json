@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Devmojos/node-db-model-helper.git"
+    "url": "https://github.com/devmojos/node-db-model-helper.git"
   },
   "scripts": {
     "test": "jest --config jestconfig.json",

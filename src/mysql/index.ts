@@ -13,6 +13,7 @@ const MysqlHelper = (settings: IDBHelperSettings) : IDBHelper => {
     });
      
     return {
+        createPool: db.createPool,
         model: db.model,
         close: db.close
     };

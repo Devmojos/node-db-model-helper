@@ -18,6 +18,7 @@ export interface IModelQueries {
 }
 
 export interface IDBHelper {
+    createPool(): void;
     model: IModelQueries
     close(): void
 }

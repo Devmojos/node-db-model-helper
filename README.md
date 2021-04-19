@@ -27,6 +27,13 @@ const mysqlHelper : IDBHelper = DbHelpers.mysql({
 
 const displayInfo = async (db: IDBHelper) => {
 
+    //create a pool to the database
+    mysqlHelper.createPool();
+
+    //
+    // Run how many queries you want
+    //
+
     //Tables
     const tables : string[] = await db.model.getTables();
     console.log("Tables: ", tables )
@@ -35,7 +42,9 @@ const displayInfo = async (db: IDBHelper) => {
     const columns = await db.model.getColumns("some_table");
     console.log("Columns: ", columns);
 
+    //
     //Close database connection when you don't need it anymore
+    //
     db.close();
 
 };

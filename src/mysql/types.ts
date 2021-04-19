@@ -9,9 +9,9 @@ export interface IQueryResult {
 }
 
 export interface IMysqlConnector {
-    pool: any,
-    query(sql: string): Promise<IQueryResult>,
     model: IModelQueries,
+    createPool(): void,
+    query(sql: string): Promise<IQueryResult>,
     close(): void
 }
 
